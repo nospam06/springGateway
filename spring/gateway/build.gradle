@@ -1,0 +1,5 @@
+dependencies {
+    api "org.springframework.cloud:spring-cloud-starter-gateway:$springCloudVersion"
+    runtimeOnly "org.yaml:snakeyaml:2.2"
+    runtimeOnly("ai.trippy:loggingwebflux:$trippyCoreVersion")
+}

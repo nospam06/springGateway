@@ -1,0 +1,27 @@
+plugins {
+    id 'org.springframework.boot' version "$springbootVersion"
+    id 'org.graalvm.buildtools.native' version '0.10.1'
+}
+dependencies {
+    implementation project(':spring:gateway')
+}
+bootJar {
+    mainClass.set('org.example.Application')
+    archiveBaseName.set('springgateway')
+}
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+graalvmNative {
+    binaries {
+        main {
+            imageName = 'springgateway'
+            buildArgs.add('--enable-preview')
+        }
+    }
+}
+bootRun {
+    systemProperties.putAll(System.properties)
+}

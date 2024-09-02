@@ -1,0 +1,37 @@
+plugins {
+    id 'java-library'
+}
+allprojects {
+    group = 'ai.trippy'
+    version = "$projectVersion"
+}
+subprojects {
+    apply plugin: 'java-library'
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding("UTF-8")
+    }
+    test {
+        useJUnitPlatform()
+    }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            name = 'github'
+            allowInsecureProtocol true
+            url "https://maven.pkg.github.com/TrippyTime/trippy-java-core"
+            credentials {
+                username = project.findProperty("gh.username") ?: System.getenv("USERNAME")
+                password = project.findProperty("gh.token") ?: System.getenv("TOKEN")
+            }
+        }
+    }
+    dependencies {
+        compileOnly "org.projectlombok:lombok:$lombokVersion"
+        annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+        testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+        testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+        testImplementation "org.springframework.boot:spring-boot-starter-test:$springbootVersion"
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    }
+}
