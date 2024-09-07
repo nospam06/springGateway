@@ -2,24 +2,7 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: mobile
-          predicates:
-            - Path=/api/mobilebackend/**
-          uri: http://trippymobilebackend:8080
-        - id: dashboard
-          predicates:
-            - Path=/fe/dashboard/**
-          uri: http://trippy-backoffice-fe:8080
-        - id: image-library-fe
-          predicates:
-            - Path=/fe/imagelibrary/**
-          uri: http://trippy-image-library-fe:8080
-        - id: s3Get
-          predicates:
-            - Path=/api/s3/**
-            - Method=GET
-          uri: http://trippys3:8080
         - id: backend
           predicates:
-            - Path=/health, /login, /api/backend/**, /api/trippy-ai-triplets/**, /api/trippy-image-editor/**, /api/trippy-ned/**, /api/location/**, /api/cardcreator/**, /api/trippy-article-parser/**, /api/trippy-image-selector/**, /api/trippy-triplets-gpt/**, /api/subscription/**, /api/imagelibrary/**, /api/s3/**, /api/trippy-clip-model/**
-          uri: http://trippybackend:8080
+            - Path=/health, /api/core/**
+          uri: http://javacore:8080
